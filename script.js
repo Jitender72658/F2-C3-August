@@ -20,17 +20,20 @@ async function fetchData(url) {
         items.push(object);
       });
   
-      getMenu(); // Assuming displayItems is a function that displays the items
+      getMenu(items); // Assuming displayItems is a function that displays the items
       let orders =takeOrder();
     } catch (error) {
       console.error(error.message);
     }
   }
 
-
+// fetching and loading data at starting
 fetchAndDisplayItems(url);
 let itemSection = document.getElementById('itemSection');
-function getMenu(){
+
+// getMenu function for displaying data
+function getMenu(items){
+     itemSection.innerHTML=""; 
    for(let i =0;i<items.length;i++){
         let cardDiv = document.createElement('div');
         cardDiv.className="box";
@@ -68,7 +71,7 @@ function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   
-
+// funciton for generating random values in a given range
 function getRandomValues(){
         const minValue = 0; // Replace with your desired minimum value
         const maxValue = items.length-1; // Replace with your desired maximum value
@@ -107,6 +110,7 @@ openPopupButton.addEventListener('click', () => {
 });
 let popupMainContent = document.getElementById("takenOrderDetails");
 let orderedItemHeading = document.getElementById("orderedItemHeading");
+//// function for displaying popup with ordered items and processing details
 function addDetailToPopUp(currOrder){
     popupMainContent.innerHTML="";
     for(let i= 0;i<currOrder.length;i++){
@@ -140,7 +144,7 @@ closePopupButton.addEventListener('click', () => {
 
 });
 
-//////////////
+////////////// methods for processing of order
 function TakeOrder() {
     return new Promise(resolve => {
       setTimeout(() => {
@@ -169,12 +173,15 @@ function TakeOrder() {
       setTimeout(() => {
         addContent("Processing payment ...")
         resolve({ order_status: true, paid: true});
-      }, 5000);
+      }, 1500);
     });
   }
   
   function thankyouFnc() {
-    addContent("Thank you for eating with us today!");
+    setTimeout(() => {
+        addContent("Thank you for eating with us today!");
+        console.log(orders);
+      }, 2000); 
   }
   
   async function processOrder() {
@@ -185,7 +192,7 @@ function TakeOrder() {
       const prepStatus = await orderPrep(order);
       console.log('Order prepared:', prepStatus);
       
-      if (!prepStatus.paid) {
+      if (prepStatus.order_status) {
         const paymentStatus = await payOrder();
         console.log('Payment status:', paymentStatus);
   
@@ -198,7 +205,8 @@ function TakeOrder() {
     }
   }
 
- function addContent(message){ 
+  /// for displaying messages on popup for processing
+  function addContent(message){ 
     orderedItemHeading.style.display="none";
     popupMainContent.innerHTML="";
     let orderProcessingMessage =document.createElement("h4");
@@ -208,4 +216,23 @@ function TakeOrder() {
     popupMainContent.style.justifyContent = "center";
     popupMainContent.style.alignItems = "center";
     popupMainContent.appendChild(orderProcessingMessage);
+  }
+
+
+  //// for searching items
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input',function(){
+    searchFoodItem();
+})
+ function searchFoodItem(){
+        let inputValue = searchInput.value;
+        const regexPattern = new RegExp(`${inputValue}`,"i");
+        let filteredData = [];
+        for(let i = 0;i<items.length;i++){
+            const currItem= items[i];
+            if(regexPattern.test(currItem.name)){
+                filteredData.push(currItem);
+            }
+        }
+       getMenu(filteredData);
   }
