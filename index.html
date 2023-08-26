@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Food Ordering</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="wrapper">
+        // fixed sidebar div
+        <div class="sidebar">
+             <div class="about-div">
+                <img src="./Images/mainLogo.svg">
+                <h2 class="pos-change">Your Restaurant Menu</h2>
+                <p class="pos-change">We server best</p>
+             </div>
+             <hr>
+             <div class="quick-links">
+                 <h2 class="pos-change">Quick Links</h2>
+                 <ol>
+                    <li>Home</li>
+                    <li>Your Orders</li>
+                    <li>Wallet</li>
+                    <li>Profile</li>
+                    <li>Logout</li>
+                 </ol>
+             </div>
+             <hr>
+             <div class="more-about-us">
+                <h2 class="pos-change">More About Us</h2>
+                 <ol>
+                    <li>Our blog</li>
+                    <li>Upcoming Dishes</li>
+                    <li>Our Story</li>
+                    <li>Social Media Links</li>
+                 </ol>
+             </div>
+        </div>
+
+        // main-content div
+        <div class="content">
+          <navbar class="navbar">
+            <div class="search-div">
+               <img id="magnifier" src="./Images/magnifyingglass.png">
+               <input type="text" id="searchInput" name="serach" placeholder=" Search food item">
+            </div>
+            <div class="sign-up">
+                <button id="signUpButton">Sign Up</button>
+            </div>
+            <div clas="login">
+                <button id="loginButton">Login </button>
+            </div>
+            <div>
+                <img id="userLogo" src="./Images/blangkon_holding.svg">
+            </div>
+          </navbar>
+
+          <section class="offer-banner-section">
+              <img src="./Images/offer_poster.svg">
+          </section>
+          <section>
+            
+            <div class="get-order-div">
+                <h1>Menu</h1>
+                <button id="openPopup">Take Order</button>
+            </div>
+           
+            <div id="popupContainer" class="popup-container">
+              <div class="popup-content">
+                <h2 id="orderedItemHeading">Ordered Items</h2>
+                  <div class="taken-order-details" id="takenOrderDetails">
+
+                  </div> 
+
+                <div class="close-popup">
+                    <button id="closePopup">Close</button>
+                  </div>
+              </div>
+            </div>
+          </section>
+         
+          <section class="menu-items" id="itemSection">
+              
+          </section>
+    
+        </div>
+      </div>
+    
+    <script src="./script.js"></script>
+</body>
+</html>
